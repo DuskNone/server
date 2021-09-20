@@ -41,3 +41,4 @@ Scratch.UserSession.load(function(err, user){
     });
   });
 });
+
