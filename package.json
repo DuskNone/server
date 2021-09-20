@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Hello World!",
   "main": "basic.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,6 +15,14 @@
     "request": "^2.88.2",
     "scratch-api": "^1.1.12",
     "scratch-site-api": "^1.2.1",
-    "ws": "^8.2.1"
-  }
+    "ws": "^8.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DuskNone/server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DuskNone/server/issues"
+  },
+  "homepage": "https://github.com/DuskNone/server#readme"
 }
