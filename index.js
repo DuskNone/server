@@ -3,6 +3,7 @@
 const request = require('request');
 const func = require('./functions');
 require('dotenv').config()
+const keepAlive = require("./server")
 
 // var https = require('https');
 // var util = require('util');
@@ -34,7 +35,7 @@ var project_id = 572431520;
 var project_owner = 'dusknone';
 var tick = 0; //server tick
 // User = 
-
+keepAlive()
 Scratch.UserSession.create(cUser,cPass,function(err, user){
   user.cloudSession(project_id, function(err, cloud) {
     setInterval(()=>{

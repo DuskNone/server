@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^10.0.0",
+    "express": "^4.17.1",
     "meowing": "^0.2.1",
     "request": "^2.88.2",
     "scratch-api": "^1.1.12",
