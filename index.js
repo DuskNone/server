@@ -9,6 +9,9 @@ require('dotenv').config()
 // var events = require('events');
 // var fs = require('fs');
 
+const cUser = process.env['USER'];
+const cPass = process.env['PASS'];
+
 // Scraptch Api Stuff
 const WebSocket = require("ws");
 const Scratch = require('scratch-api');
@@ -31,7 +34,8 @@ var project_id = 572431520;
 var project_owner = 'dusknone';
 var tick = 0; //server tick
 // User = 
-Scratch.UserSession.create(process.env.USER,process.env.PASS,function(err, user){
+
+Scratch.UserSession.create(cUser,cPass,function(err, user){
   user.cloudSession(project_id, function(err, cloud) {
     setInterval(()=>{
     
