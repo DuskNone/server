@@ -40,11 +40,14 @@ Scratch.UserSession.create(cUser,cPass,function(err, user){
   user.cloudSession(project_id, function(err, cloud) {
     setInterval(()=>{
     
-    cloud.set("☁ qz",1+parseInt(cloud.get("☁ qz")))
+    // cloud.set("☁ qz",1+parseInt(cloud.get("☁ qz")))
+    let set = func.encode(Date())
+    console.log(set)
+    cloud.set("☁ qz",set)
     tick+=1;
     },30);
     cloud.on('set', function(name, value) {
-      console.log(name, value);
+      // console.log(name, value);
     });
   });
 });
