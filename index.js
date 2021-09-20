@@ -3,8 +3,7 @@
 const request = require('request');
 const func = require('./functions');
 require('dotenv').config()
-const USR = process.env.USR
-const PWD = process.env.PWD
+
 // var https = require('https');
 // var util = require('util');
 // var events = require('events');
@@ -32,7 +31,7 @@ var project_id = 572431520;
 var project_owner = 'dusknone';
 var tick = 0; //server tick
 // User = 
-Scratch.UserSession.create(USR,PWD,(err, user)=>{
+Scratch.UserSession.create(process.env.username,process.env.passkey,(err, user)=>{
   user.cloudSession(project_id, function(err, cloud) {
     setInterval(()=>{
     
