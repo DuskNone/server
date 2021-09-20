@@ -23,7 +23,7 @@ var project_data = 0;
 var user_data = 0;
 const config_charset = `0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.!?":;'\`,#$%&@*+-=~><^_|()[]{}/\ `
 
-//Interacting with the Project as a User
+// Interacting with the Project as a User
 
 var project_id = 572431520;
 var project_owner = 'dusknone';
