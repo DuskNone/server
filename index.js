@@ -33,21 +33,23 @@ const config_charset = `0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst
 
 var project_id = 572431520;
 var project_owner = 'dusknone';
-var tick = 0; //server tick
+let tick= 0; //server tick
+let dt = new Date(); //framerate
 // User = 
 keepAlive()
 Scratch.UserSession.create(cUser,cPass,function(err, user){
   user.cloudSession(project_id, function(err, cloud) {
-    setInterval(()=>{
+    setInterval(async()=>{
       try{
         console.clear()
         // cloud.set("☁ qz",1+parseInt(cloud.get("☁ qz")))
-        let get = cloud.get("☁ qz")
-        let qz = [tick,Date()]
+         let get =await cloud.get("☁ qz")
+        let qz = [`tick: ${tick}`,Date(),`tickspeed: ${Date.now()-dt}`]
+        dt = Date.now()
         console.log(qz)
         set = func.encode(qz.join())
-        console.log(set)
-        cloud.set("☁ qz",set)
+        console.log(dt)
+        await cloud.set("☁ qz",set)
         tick+=1;
       }catch(err){
       }
