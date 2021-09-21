@@ -41,7 +41,11 @@ Scratch.UserSession.create(cUser,cPass,function(err, user){
     setInterval(()=>{
     
     // cloud.set("☁ qz",1+parseInt(cloud.get("☁ qz")))
-    let set = func.encode(Date())
+    console.clear()
+    let get = cloud.get("☁ qz")
+    let qz = [tick,Date()]
+    console.log(qz)
+    set = func.encode(qz.join())
     console.log(set)
     cloud.set("☁ qz",set)
     tick+=1;
