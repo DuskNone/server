@@ -36,29 +36,71 @@ var project_owner = 'dusknone';
 let tick= 0; //server tick
 let dt = new Date(); //framerate
 // User = 
+let cloudVars = {};
+
 keepAlive()
-Scratch.UserSession.create(cUser,cPass,function(err, user){
-  user.cloudSession(project_id, function(err, cloud) {
-    setInterval(async()=>{
-      try{
-        console.clear()
-        // cloud.set("☁ qz",1+parseInt(cloud.get("☁ qz")))
-         let get =await cloud.get("☁ qz")
-        let qz = [`tick: ${tick}`,Date(),`tickspeed: ${Date.now()-dt}`]
-        dt = Date.now()
-        console.log(qz)
-        set = func.encode(qz.join())
-        console.log(dt)
-        await cloud.set("☁ qz",set)
-        tick+=1;
-      }catch(err){
-      }
-    },30);
 
+function CreateSession(){
+  try{
+    Scratch.UserSession.create(cUser,cPass,function(err, user){
+      user.cloudSession(project_id, function(err, cloud) {
+        
+        setInterval(()=>{
+          // console.clear()
+          
+          // cloud.set("☁ qz",1+parseInt(cloud.get("☁ qz")))
+          let get = cloud.get("☁ qz")
+          let qz = [`tick: ${tick}`,Date(),`tickspeed: ${Date.now()-dt}`]
+          dt = Date.now()
+          // console.log(qz)
+          set = func.encode(qz.join())
+          // console.log(dt)
+          try{
+          cloud.set("☁ qz",set)
+            tick+=1;
+            // console.log(cloudVars)
+            let val = cloud.get(`☁ request`)
+            // console.log(val.length)
+            if (val.toString().length > 256) {
+              cloud.set(`☁ request`,val.substring(0,256))
+              console.log(`☁ request`, func.decode(val))
+              
+            }
+          }catch(e){
+            console.log(`Corrupt tick: ${tick}, ${new Date()}`)
+          }
+        },30);
 
-    cloud.on('set', function(name, value) {
-      // console.log(name, value);
+        // try{
+        //   cloud.on('set', function(name, value) {
+        //     // cloudVars[name] = func.decode(value);
+        //     // console.log(name, func.decode(value))
+        //     // if (name == `☁ request`) {
+          
+        //     //   // let str = cloud.get(`☁ request`)
+        //     // }
+        //   });
+        // }catch(e){
+        //   console.log(`Set event error: ${tick}, ${new Date()}`)
+        // }
+
+      });
     });
-  });
-});
+  }catch(e){
+    console.log(`Corrupt session: ${tick}, ${new Date()}`)
+  }
+}
 
+
+try{
+  CreateSession()
+}catch(error){
+  // console.log(error)
+  console.log('dusk')
+}
+
+
+// process.on('unhandledRejection', (reason, promise) => {
+//   console.log('Unhandled Rejection at:', promise, 'reason:', reason);
+//   // Application specific logging, throwing an error, or other logic here
+// });
