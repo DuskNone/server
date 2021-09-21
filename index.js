@@ -39,17 +39,21 @@ keepAlive()
 Scratch.UserSession.create(cUser,cPass,function(err, user){
   user.cloudSession(project_id, function(err, cloud) {
     setInterval(()=>{
-    
-    // cloud.set("☁ qz",1+parseInt(cloud.get("☁ qz")))
-    console.clear()
-    let get = cloud.get("☁ qz")
-    let qz = [tick,Date()]
-    console.log(qz)
-    set = func.encode(qz.join())
-    console.log(set)
-    cloud.set("☁ qz",set)
-    tick+=1;
+      try{
+        console.clear()
+        // cloud.set("☁ qz",1+parseInt(cloud.get("☁ qz")))
+        let get = cloud.get("☁ qz")
+        let qz = [tick,Date()]
+        console.log(qz)
+        set = func.encode(qz.join())
+        console.log(set)
+        cloud.set("☁ qz",set)
+        tick+=1;
+      }catch(err){
+      }
     },30);
+
+
     cloud.on('set', function(name, value) {
       // console.log(name, value);
     });
