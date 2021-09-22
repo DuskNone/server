@@ -4,6 +4,7 @@ const request = require('request');
 const func = require('./functions');
 require('dotenv').config()
 const keepAlive = require("./server")
+const meowCloud = require('meowing')
 
 // var https = require('https');
 // var util = require('util');
@@ -38,7 +39,7 @@ let dt = new Date(); //framerate
 // User = 
 let cloudVars = {};
 
-keepAlive()
+  
 
 function CreateSession(){
   try{
@@ -92,15 +93,43 @@ function CreateSession(){
 }
 
 
-try{
-  CreateSession()
-}catch(error){
-  // console.log(error)
-  console.log('dusk')
+async function mainOLD(){
+  try{
+    // throw new Error('No coffee');
+    await CreateSession()
+  }catch(error){
+    // console.log(error)
+    console.log('uh oh...')
+  }
 }
 
+keepAlive()
 
-// process.on('unhandledRejection', (reason, promise) => {
-//   console.log('Unhandled Rejection at:', promise, 'reason:', reason);
-//   // Application specific logging, throwing an error, or other logic here
-// });
+async function main(){
+  const session = new meowCloud.ScratchSession(process.env.USER, process.env.PASS);
+  try{
+    await session.login().then(console.log('Log in sucessful'))
+    let cloud = await session.createCloudConnection(project_id)
+    // console.log(cloud.getVariable(qz))
+    setInterval(async()=>{
+      // console.clear()
+      
+      let qz = [`tick: ${tick}`,Date(),`tps: ${Math.floor(100*1000/(Date.now()-dt))/100}`]
+      let set = func.encode(qz.join())
+      try{
+        await cloud.setVariable(`qz`,set)
+      }catch(e){}
+      // console.log(qz)
+      // console.log(cloud.variables)
+
+      dt = Date.now()
+      tick+=1;
+    },50); //Tick rate of 20tps
+
+  }catch(error){
+    // console.log(error)
+    console.log('yikes')
+  }
+}
+
+main()
