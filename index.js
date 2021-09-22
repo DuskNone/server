@@ -97,7 +97,7 @@ async function main(){
       // }catch(e){}
       // console.log(qz)
       console.log(cloud.variables)
-      console.log(await cloud.getVariable('CLOUD_HEADER'));
+      // console.log(await cloud.getVariable('CLOUD_HEADER'));
       // if (func.decode(cloud.getVariable('CLOUD_HEADER')) == 'PUT') {
       //   cloud.setVariable('CLOUD_HEADER',func.encode('PUT'))
       // }
